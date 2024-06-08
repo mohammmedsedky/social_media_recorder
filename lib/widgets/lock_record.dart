@@ -29,7 +29,7 @@ class _LockRecordState extends State<LockRecord> with TickerProviderStateMixin {
       padding:
           EdgeInsets.all(widget.soundRecorderState.second % 2 == 0 ? 0 : 8),
       child: Transform.translate(
-        offset: const Offset(0, -70),
+        offset: const Offset(0, -75),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: AnimatedOpacity(
@@ -40,7 +40,20 @@ class _LockRecordState extends State<LockRecord> with TickerProviderStateMixin {
               height: 50 - widget.soundRecorderState.heightPosition < 0
                   ? 0
                   : 50 - widget.soundRecorderState.heightPosition,
-              color: Colors.grey.shade100,
+
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xffF3F1F1),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: widget.lockIcon ??
@@ -54,7 +67,7 @@ class _LockRecordState extends State<LockRecord> with TickerProviderStateMixin {
                               opacity: widget.soundRecorderState.second % 2 != 0
                                   ? 0
                                   : 1,
-                              child: const Icon(Icons.lock_outline_rounded)),
+                              child: const Icon(Icons.lock_outline_rounded,color: Colors.black,)),
                         ),
                         Align(
                           alignment: Alignment.topCenter,
@@ -64,7 +77,7 @@ class _LockRecordState extends State<LockRecord> with TickerProviderStateMixin {
                               opacity: widget.soundRecorderState.second % 2 == 0
                                   ? 0
                                   : 1,
-                              child: const Icon(Icons.lock_open_rounded)),
+                              child: const Icon(Icons.lock_open_rounded,color: Colors.black,)),
                         ),
                       ],
                     ),

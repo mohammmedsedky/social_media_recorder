@@ -128,6 +128,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     if (_timer != null) _timer!.cancel();
     if (_timerCounter != null) _timerCounter!.cancel();
     recordMp3.stop();
+    stopRecording?.call('0:0');
     notifyListeners();
   }
 
@@ -155,7 +156,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     DateTime now = DateTime.now();
     String convertedDateTime =
         "${now.year.toString()}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}-${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
-    // print("the current data is $convertedDateTime");
+    convertedDateTime = convertedDateTime.replaceAll(":", ".");
     String storagePath =
         _sdPath + "/" + convertedDateTime + _getSoundExtention();
     mPath = storagePath;
@@ -271,8 +272,8 @@ class SoundRecordNotifier extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  /// to check permission
+////
+  /// to check permissionl
   voidInitialSound() async {
     // if (Platform.isIOS) _isAcceptedPermission = true;
 

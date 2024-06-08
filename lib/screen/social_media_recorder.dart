@@ -221,6 +221,13 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
             : widget.initRecordPackageWidth,
         child: Stack(
           children: [
+            SizedBox(
+              width: 60,
+              child: LockRecord(
+                soundRecorderState: state,
+                lockIcon: widget.lockButton,
+              ),
+            ),
             Center(
               child: Padding(
                 padding: EdgeInsets.only(right: state.edge),
@@ -263,13 +270,7 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
                 ),
               ),
             ),
-            SizedBox(
-              width: 60,
-              child: LockRecord(
-                soundRecorderState: state,
-                lockIcon: widget.lockButton,
-              ),
-            )
+
           ],
         ),
       ),

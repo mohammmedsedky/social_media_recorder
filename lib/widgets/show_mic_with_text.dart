@@ -103,7 +103,9 @@ class ShowMicWithText extends StatelessWidget {
                     ),
                   ],
                   isRepeatingAnimation: true,
-                  onTap: () {},
+                  onTap: () {
+                    print('Tap Event Event Event Event');
+                  },
                 ),
               ),
             ),
