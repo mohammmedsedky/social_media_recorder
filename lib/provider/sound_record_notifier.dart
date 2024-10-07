@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:core';
+import 'dart:core';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,7 +27,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   String initialStorePathRecord = "";
 
   /// recording mp3 sound Object
-  Record recordMp3 = Record();
+  AudioRecorder recordMp3 = AudioRecorder();
 
   /// recording mp3 sound to check if all permisiion passed
   bool _isAcceptedPermission = false;
@@ -260,7 +262,10 @@ class SoundRecordNotifier extends ChangeNotifier {
       buttonPressed = true;
       String recordFilePath = await getFilePath();
       _timer = Timer(const Duration(milliseconds: 900), () {
-        recordMp3.start(path: recordFilePath);
+        recordMp3.start(const RecordConfig(
+            bitRate: 128000,
+            sampleRate: 44100,
+        ), path: recordFilePath);
       });
 
       if (startRecord != null) {
