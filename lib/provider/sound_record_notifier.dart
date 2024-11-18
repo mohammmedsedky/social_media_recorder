@@ -91,7 +91,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     this.startRecord = false,
     this.heightPosition = 0,
     this.lockScreenRecord = false,
-    this.encode = AudioEncoderType.AAC,
+    this.encode = AudioEncoderType.WAV,
     this.maxRecordTime,
   });
 
@@ -140,6 +140,8 @@ class SoundRecordNotifier extends ChangeNotifier {
         encode == AudioEncoderType.AAC_HE ||
         encode == AudioEncoderType.OPUS) {
       return ".m4a";
+    } else if (encode == AudioEncoderType.WAV) {
+      return ".wav";
     } else {
       return ".3gp";
     }
@@ -149,8 +151,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   Future<String> getFilePath() async {
     String _sdPath = "";
     Directory tempDir = await getTemporaryDirectory();
-    _sdPath =
-        initialStorePathRecord.isEmpty ? tempDir.path : initialStorePathRecord;
+    _sdPath = initialStorePathRecord.isEmpty ? tempDir.path : initialStorePathRecord;
     var d = Directory(_sdPath);
     if (!d.existsSync()) {
       d.createSync(recursive: true);
@@ -159,8 +160,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     String convertedDateTime =
         "${now.year.toString()}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}-${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
     convertedDateTime = convertedDateTime.replaceAll(":", ".");
-    String storagePath =
-        _sdPath + "/" + convertedDateTime + _getSoundExtention();
+    String storagePath = _sdPath + "/" + convertedDateTime + _getSoundExtention();
     mPath = storagePath;
     return storagePath;
   }
@@ -262,11 +262,9 @@ class SoundRecordNotifier extends ChangeNotifier {
       buttonPressed = true;
       String recordFilePath = await getFilePath();
       _timer = Timer(const Duration(milliseconds: 900), () {
-        recordMp3.start(const RecordConfig(
-            bitRate: 128000,
-            sampleRate: 44100,
-          encoder:  AudioEncoder.wav
-        ), path: recordFilePath);
+        recordMp3.start(
+            const RecordConfig(bitRate: 128000, sampleRate: 44100, encoder: AudioEncoder.wav),
+            path: recordFilePath);
       });
 
       if (startRecord != null) {
@@ -278,6 +276,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     }
     notifyListeners();
   }
+
 ////
   /// to check permissionl
   voidInitialSound() async {

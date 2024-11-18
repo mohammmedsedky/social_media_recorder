@@ -26,4 +26,5 @@ enum AudioEncoderType {
   /// /!\ SDK 11 on iOs /!\
   // ignore: constant_identifier_names
   OPUS,
+  WAV,
 }
