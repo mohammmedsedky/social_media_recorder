@@ -265,6 +265,7 @@ class SoundRecordNotifier extends ChangeNotifier {
         recordMp3.start(const RecordConfig(
             bitRate: 128000,
             sampleRate: 44100,
+          encoder:  AudioEncoder.wav
         ), path: recordFilePath);
       });
 
