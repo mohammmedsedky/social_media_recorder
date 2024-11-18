@@ -27,6 +27,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   String initialStorePathRecord = "";
 
   /// recording mp3 sound Object
+  /// update the path to store the sound
   AudioRecorder recordMp3 = AudioRecorder();
 
   /// recording mp3 sound to check if all permisiion passed
