@@ -88,7 +88,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     _timer?.cancel();
     _timerCounter?.cancel();
 
-      recordMp3.stop();
+    recordMp3.stop();
 
     stopRecording?.call('0:0');
     notifyListeners();
@@ -174,7 +174,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   }
 
   record(Function()? startRecord) async {
-    if (!_isAcceptedPermission) {
+    if ((await Permission.microphone.isGranted) != true) {
       await Permission.microphone.request();
       await Permission.storage.request();
       _isAcceptedPermission = true;
